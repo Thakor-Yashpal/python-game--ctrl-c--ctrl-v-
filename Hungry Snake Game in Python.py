@@ -50,7 +50,7 @@ def move_snake():
  
  
         pen.clearstamps()
- 
+ print(frist once)
          
         for segment in snake:
             pen.goto(segment[0], segment[1])
