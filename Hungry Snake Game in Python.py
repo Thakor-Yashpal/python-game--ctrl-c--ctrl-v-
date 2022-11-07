@@ -119,9 +119,20 @@ food.color("yellow")
 food.shapesize(food_size / 20)
 food.penup()
  
- 
+ #Hungry Snake Game in Python
 screen.listen()
 screen.onkey(go_up, "Up")
+screen.onkey(go_right, "Right")
+screen.onkey(go_down, "Down")
+screen.onkey(go_left, "Left")
+ 
+ 
+reset()
+turtle.done()
+one this 
+#only one change 
+screen.listen()
+screen.onkey(go_up,"Up")
 screen.onkey(go_right, "Right")
 screen.onkey(go_down, "Down")
 screen.onkey(go_left, "Left")
