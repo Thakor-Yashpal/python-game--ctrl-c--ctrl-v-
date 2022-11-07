@@ -106,6 +106,7 @@ screen.title("Snake")
 screen.bgcolor("blue")
 screen.setup(500, 500)
 screen.tracer(0)
+#python 3 can be chang
  
  
 pen = turtle.Turtle("square")
