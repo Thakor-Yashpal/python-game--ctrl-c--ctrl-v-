@@ -1,0 +1,220 @@
+datetime
+The isocalendar() of datetime.date and isocalendar() of datetime.datetime methods now returns a namedtuple() instead of a tuple. (Contributed by Dong-hee Na in bpo-24416.)
+
+distutils
+The upload command now creates SHA2-256 and Blake2b-256 hash digests. It skips MD5 on platforms that block MD5 digest. (Contributed by Christian Heimes in bpo-40698.)
+
+fcntl
+Added constants F_OFD_GETLK, F_OFD_SETLK and F_OFD_SETLKW. (Contributed by Dong-hee Na in bpo-38602.)
+
+ftplib
+FTP and FTP_TLS now raise a ValueError if the given timeout for their constructor is zero to prevent the creation of a non-blocking socket. (Contributed by Dong-hee Na in bpo-39259.)
+
+gc
+When the garbage collector makes a collection in which some objects resurrect (they are reachable from outside the isolated cycles after the finalizers have been executed), do not block the collection of all objects that are still unreachable. (Contributed by Pablo Galindo and Tim Peters in bpo-38379.)
+
+Added a new function gc.is_finalized() to check if an object has been finalized by the garbage collector. (Contributed by Pablo Galindo in bpo-39322.)
+
+hashlib
+The hashlib module can now use SHA3 hashes and SHAKE XOF from OpenSSL when available. (Contributed by Christian Heimes in bpo-37630.)
+
+Builtin hash modules can now be disabled with ./configure --without-builtin-hashlib-hashes or selectively enabled with e.g. ./configure --with-builtin-hashlib-hashes=sha3,blake2 to force use of OpenSSL based implementation. (Contributed by Christian Heimes in bpo-40479)
+
+http
+HTTP status codes 103 EARLY_HINTS, 418 IM_A_TEAPOT and 425 TOO_EARLY are added to http.HTTPStatus. (Contributed by Dong-hee Na in bpo-39509 and Ross Rhodes in bpo-39507.)
+
+IDLE and idlelib
+Added option to toggle cursor blink off. (Contributed by Zackery Spytz in bpo-4603.)
+
+Escape key now closes IDLE completion windows. (Contributed by Johnny Najera in bpo-38944.)
+
+Added keywords to module name completion list. (Contributed by Terry J. Reedy in bpo-37765.)
+
+New in 3.9 maintenance releases
+
+Make IDLE invoke sys.excepthook() (when started without ‘-n’). User hooks were previously ignored. (Contributed by Ken Hilton in bpo-43008.)
+
+The changes above have been backported to 3.8 maintenance releases.
+
+Rearrange the settings dialog. Split the General tab into Windows and Shell/Ed tabs. Move help sources, which extend the Help menu, to the Extensions tab. Make space for new options and shorten the dialog. The latter makes the dialog better fit small screens. (Contributed by Terry Jan Reedy in bpo-40468.) Move the indent space setting from the Font tab to the new Windows tab. (Contributed by Mark Roseman and Terry Jan Reedy in bpo-33962.)
+
+Apply syntax highlighting to .pyi files. (Contributed by Alex Waygood and Terry Jan Reedy in bpo-45447.)
+
+imaplib
+IMAP4 and IMAP4_SSL now have an optional timeout parameter for their constructors. Also, the open() method now has an optional timeout parameter with this change. The overridden methods of IMAP4_SSL and IMAP4_stream were applied to this change. (Contributed by Dong-hee Na in bpo-38615.)
+
+imaplib.IMAP4.unselect() is added. imaplib.IMAP4.unselect() frees server’s resources associated with the selected mailbox and returns the server to the authenticated state. This command performs the same actions as imaplib.IMAP4.close(), except that no messages are permanently removed from the currently selected mailbox. (Contributed by Dong-hee Na in bpo-40375.)
+
+importlib
+To improve consistency with import statements, importlib.util.resolve_name() now raises ImportError instead of ValueError for invalid relative import attempts. (Contributed by Ngalim Siregar in bpo-37444.)
+
+Import loaders which publish immutable module objects can now publish immutable packages in addition to individual modules. (Contributed by Dino Viehland in bpo-39336.)
+
+Added importlib.resources.files() function with support for subdirectories in package data, matching backport in importlib_resources version 1.5. (Contributed by Jason R. Coombs in bpo-39791.)
+
+Refreshed importlib.metadata from importlib_metadata version 1.6.1.
+
+inspect
+inspect.BoundArguments.arguments is changed from OrderedDict to regular dict. (Contributed by Inada Naoki in bpo-36350 and bpo-39775.)
+
+ipaddress
+ipaddress now supports IPv6 Scoped Addresses (IPv6 address with suffix %<scope_id>).
+
+Scoped IPv6 addresses can be parsed using ipaddress.IPv6Address. If present, scope zone ID is available through the scope_id attribute. (Contributed by Oleksandr Pavliuk in bpo-34788.)
+
+Starting with Python 3.9.5 the ipaddress module no longer accepts any leading zeros in IPv4 address strings. (Contributed by Christian Heimes in bpo-36384).
+
+math
+Expanded the math.gcd() function to handle multiple arguments. Formerly, it only supported two arguments. (Contributed by Serhiy Storchaka in bpo-39648.)
+
+Added math.lcm(): return the least common multiple of specified arguments. (Contributed by Mark Dickinson, Ananthakrishnan and Serhiy Storchaka in bpo-39479 and bpo-39648.)
+
+Added math.nextafter(): return the next floating-point value after x towards y. (Contributed by Victor Stinner in bpo-39288.)
+
+Added math.ulp(): return the value of the least significant bit of a float. (Contributed by Victor Stinner in bpo-39310.)
+
+multiprocessing
+The multiprocessing.SimpleQueue class has a new close() method to explicitly close the queue. (Contributed by Victor Stinner in bpo-30966.)
+
+nntplib
+NNTP and NNTP_SSL now raise a ValueError if the given timeout for their constructor is zero to prevent the creation of a non-blocking socket. (Contributed by Dong-hee Na in bpo-39259.)
+
+os
+Added CLD_KILLED and CLD_STOPPED for si_code. (Contributed by Dong-hee Na in bpo-38493.)
+
+Exposed the Linux-specific os.pidfd_open() (bpo-38692) and os.P_PIDFD (bpo-38713) for process management with file descriptors.
+
+The os.unsetenv() function is now also available on Windows. (Contributed by Victor Stinner in bpo-39413.)
+
+The os.putenv() and os.unsetenv() functions are now always available. (Contributed by Victor Stinner in bpo-39395.)
+
+Added os.waitstatus_to_exitcode() function: convert a wait status to an exit code. (Contributed by Victor Stinner in bpo-40094.)
+
+pathlib
+Added pathlib.Path.readlink() which acts similarly to os.readlink(). (Contributed by Girts Folkmanis in bpo-30618)
+
+pdb
+On Windows now Pdb supports ~/.pdbrc. (Contributed by Tim Hopper and Dan Lidral-Porter in bpo-20523.)
+
+poplib
+POP3 and POP3_SSL now raise a ValueError if the given timeout for their constructor is zero to prevent the creation of a non-blocking socket. (Contributed by Dong-hee Na in bpo-39259.)
+
+pprint
+pprint can now pretty-print types.SimpleNamespace. (Contributed by Carl Bordum Hansen in bpo-37376.)
+
+pydoc
+The documentation string is now shown not only for class, function, method etc, but for any object that has its own __doc__ attribute. (Contributed by Serhiy Storchaka in bpo-40257.)
+
+random
+Added a new random.Random.randbytes method: generate random bytes. (Contributed by Victor Stinner in bpo-40286.)
+
+signal
+Exposed the Linux-specific signal.pidfd_send_signal() for sending to signals to a process using a file descriptor instead of a pid. (bpo-38712)
+
+smtplib
+SMTP and SMTP_SSL now raise a ValueError if the given timeout for their constructor is zero to prevent the creation of a non-blocking socket. (Contributed by Dong-hee Na in bpo-39259.)
+
+LMTP constructor now has an optional timeout parameter. (Contributed by Dong-hee Na in bpo-39329.)
+
+socket
+The socket module now exports the CAN_RAW_JOIN_FILTERS constant on Linux 4.1 and greater. (Contributed by Stefan Tatschner and Zackery Spytz in bpo-25780.)
+
+The socket module now supports the CAN_J1939 protocol on platforms that support it. (Contributed by Karl Ding in bpo-40291.)
+
+The socket module now has the socket.send_fds() and socket.recv_fds() functions. (Contributed by Joannah Nanjekye, Shinya Okano and Victor Stinner in bpo-28724.)
+
+time
+On AIX, thread_time() is now implemented with thread_cputime() which has nanosecond resolution, rather than clock_gettime(CLOCK_THREAD_CPUTIME_ID) which has a resolution of 10 milliseconds. (Contributed by Batuhan Taskaya in bpo-40192)
+
+sys
+Added a new sys.platlibdir attribute: name of the platform-specific library directory. It is used to build the path of standard library and the paths of installed extension modules. It is equal to "lib" on most platforms. On Fedora and SuSE, it is equal to "lib64" on 64-bit platforms. (Contributed by Jan Matějek, Matěj Cepl, Charalampos Stratakis and Victor Stinner in bpo-1294959.)
+
+Previously, sys.stderr was block-buffered when non-interactive. Now stderr defaults to always being line-buffered. (Contributed by Jendrik Seipp in bpo-13601.)
+
+tracemalloc
+Added tracemalloc.reset_peak() to set the peak size of traced memory blocks to the current size, to measure the peak of specific pieces of code. (Contributed by Huon Wilson in bpo-40630.)
+
+typing
+PEP 593 introduced an typing.Annotated type to decorate existing types with context-specific metadata and new include_extras parameter to typing.get_type_hints() to access the metadata at runtime. (Contributed by Till Varoquaux and Konstantin Kashin.)
+
+unicodedata
+The Unicode database has been updated to version 13.0.0. (bpo-39926).
+
+venv
+The activation scripts provided by venv now all specify their prompt customization consistently by always using the value specified by __VENV_PROMPT__. Previously some scripts unconditionally used __VENV_PROMPT__, others only if it happened to be set (which was the default case), and one used __VENV_NAME__ instead. (Contributed by Brett Cannon in bpo-37663.)
+
+xml
+White space characters within attributes are now preserved when serializing xml.etree.ElementTree to XML file. EOLNs are no longer normalized to “n”. This is the result of discussion about how to interpret section 2.11 of XML spec. (Contributed by Mefistotelis in bpo-39011.)
+
+Optimizations
+Optimized the idiom for assignment a temporary variable in comprehensions. Now for y in [expr] in comprehensions is as fast as a simple assignment y = expr. For example:
+
+sums = [s for s in [0] for x in data for s in [s + x]]
+
+Unlike the := operator this idiom does not leak a variable to the outer scope.
+
+(Contributed by Serhiy Storchaka in bpo-32856.)
+
+Optimized signal handling in multithreaded applications. If a thread different than the main thread gets a signal, the bytecode evaluation loop is no longer interrupted at each bytecode instruction to check for pending signals which cannot be handled. Only the main thread of the main interpreter can handle signals.
+
+Previously, the bytecode evaluation loop was interrupted at each instruction until the main thread handles signals. (Contributed by Victor Stinner in bpo-40010.)
+
+Optimized the subprocess module on FreeBSD using closefrom(). (Contributed by Ed Maste, Conrad Meyer, Kyle Evans, Kubilay Kocak and Victor Stinner in bpo-38061.)
+
+PyLong_FromDouble() is now up to 1.87x faster for values that fit into long. (Contributed by Sergey Fedoseev in bpo-37986.)
+
+A number of Python builtins (range, tuple, set, frozenset, list, dict) are now sped up by using PEP 590 vectorcall protocol. (Contributed by Dong-hee Na, Mark Shannon, Jeroen Demeyer and Petr Viktorin in bpo-37207.)
+
+Optimized difference_update() for the case when the other set is much larger than the base set. (Suggested by Evgeny Kapun with code contributed by Michele Orrù in bpo-8425.)
+
+Python’s small object allocator (obmalloc.c) now allows (no more than) one empty arena to remain available for immediate reuse, without returning it to the OS. This prevents thrashing in simple loops where an arena could be created and destroyed anew on each iteration. (Contributed by Tim Peters in bpo-37257.)
+
+floor division of float operation now has a better performance. Also the message of ZeroDivisionError for this operation is updated. (Contributed by Dong-hee Na in bpo-39434.)
+
+Decoding short ASCII strings with UTF-8 and ascii codecs is now about 15% faster. (Contributed by Inada Naoki in bpo-37348.)
+
+Here’s a summary of performance improvements from Python 3.4 through Python 3.9:
+
+Python version                       3.4     3.5     3.6     3.7     3.8    3.9
+--------------                       ---     ---     ---     ---     ---    ---
+
+Variable and attribute read access:
+    read_local                       7.1     7.1     5.4     5.1     3.9    3.9
+    read_nonlocal                    7.1     8.1     5.8     5.4     4.4    4.5
+    read_global                     15.5    19.0    14.3    13.6     7.6    7.8
+    read_builtin                    21.1    21.6    18.5    19.0     7.5    7.8
+    read_classvar_from_class        25.6    26.5    20.7    19.5    18.4   17.9
+    read_classvar_from_instance     22.8    23.5    18.8    17.1    16.4   16.9
+    read_instancevar                32.4    33.1    28.0    26.3    25.4   25.3
+    read_instancevar_slots          27.8    31.3    20.8    20.8    20.2   20.5
+    read_namedtuple                 73.8    57.5    45.0    46.8    18.4   18.7
+    read_boundmethod                37.6    37.9    29.6    26.9    27.7   41.1
+
+Variable and attribute write access:
+    write_local                      8.7     9.3     5.5     5.3     4.3    4.3
+    write_nonlocal                  10.5    11.1     5.6     5.5     4.7    4.8
+    write_global                    19.7    21.2    18.0    18.0    15.8   16.7
+    write_classvar                  92.9    96.0   104.6   102.1    39.2   39.8
+    write_instancevar               44.6    45.8    40.0    38.9    35.5   37.4
+    write_instancevar_slots         35.6    36.1    27.3    26.6    25.7   25.8
+
+Data structure read access:
+    read_list                       24.2    24.5    20.8    20.8    19.0   19.5
+    read_deque                      24.7    25.5    20.2    20.6    19.8   20.2
+    read_dict                       24.3    25.7    22.3    23.0    21.0   22.4
+    read_strdict                    22.6    24.3    19.5    21.2    18.9   21.5
+
+Data structure write access:
+    write_list                      27.1    28.5    22.5    21.6    20.0   20.0
+    write_deque                     28.7    30.1    22.7    21.8    23.5   21.7
+    write_dict                      31.4    33.3    29.3    29.2    24.7   25.4
+    write_strdict                   28.4    29.9    27.5    25.2    23.1   24.5
+
+Stack (or queue) operations:
+    list_append_pop                 93.4   112.7    75.4    74.2    50.8   50.6
+    deque_append_pop                43.5    57.0    49.4    49.2    42.5   44.2
+    deque_append_popleft            43.7    57.3    49.7    49.7    42.8   46.4
+
+Timing loop:
+    loop_overhead                    0.5     0.6     0.4     0.3     0.3    0.3
+These results were generated from the variable access benchmark script at: Tools/scripts/var_access_benchmark.py. The benchmark script displays timings in nanoseconds. The benchmarks were measured on an Intel® Core™ i7-4960HQ processor running the macOS 64-bit builds found at python.org.
